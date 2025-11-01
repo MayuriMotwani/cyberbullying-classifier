@@ -1,18 +1,23 @@
 # ============================================================
-# 🌐 STREAMLIT APP FOR CYBERBULLYING DETECTION (2 MODELS)
+# ⚡ CYBERBULLYING DETECTION APP (Dual Model Families)
 # ============================================================
+
 import streamlit as st
 import joblib
-import re, string
+import re
+import string
 import nltk
 from nltk.corpus import stopwords
 
 # ------------------------------------------------------------
-# 🧹 Text cleaning setup
+# 📦 NLTK setup
 # ------------------------------------------------------------
-nltk.download('stopwords', quiet=True)
-stop_words = set(stopwords.words('english'))
+nltk.download("stopwords", quiet=True)
+stop_words = set(stopwords.words("english"))
 
+# ------------------------------------------------------------
+# 🧹 Text cleaning
+# ------------------------------------------------------------
 def clean_text(text):
     text = text.lower()
     text = re.sub(r"http\S+|@\w+|#", "", text)
@@ -20,51 +25,63 @@ def clean_text(text):
     return " ".join([w for w in text.split() if w not in stop_words])
 
 # ------------------------------------------------------------
-# 💾 Load saved models & vectorizer
+# ⚙️ Load model family
 # ------------------------------------------------------------
 @st.cache_resource
-def load_artifacts():
-    vectorizer = joblib.load("artifacts/vectorizer_fast.joblib")
-    log_model = joblib.load("artifacts/LogisticRegression_fast.joblib")
-    rf_model = joblib.load("artifacts/RandomForest_fast.joblib")
-    return vectorizer, log_model, rf_model
+def load_models(family):
+    if family == "Tweets Models":
+        vectorizer = joblib.load("artifacts/tweets_vectorizer.joblib")
+        lr_model = joblib.load("artifacts/tweets_LR.joblib")
+        rf_model = joblib.load("artifacts/tweets_RF.joblib")
+    else:  # Fast Models
+        vectorizer = joblib.load("artifacts/vectorizer_fast.joblib")
+        lr_model = joblib.load("artifacts/LogisticRegression_fast.joblib")
+        rf_model = joblib.load("artifacts/RandomForest_fast.joblib")
 
-vectorizer, log_model, rf_model = load_artifacts()
+    return vectorizer, lr_model, rf_model
 
 # ------------------------------------------------------------
 # 🎨 Streamlit UI
 # ------------------------------------------------------------
-st.set_page_config(page_title="Cyberbullying Detector", page_icon="🧠", layout="centered")
+st.set_page_config(page_title="Cyberbullying Detector", page_icon="⚡", layout="centered")
 
-st.title("🧠 Cyberbullying Detection App")
-st.write("Enter a social media comment or tweet below to predict whether it contains cyberbullying content.")
+st.title("⚡ Cyberbullying Detection System")
+st.write("Detect cyberbullying type using two families of ML models trained on different datasets.")
 
-# Model selection
-model_choice = st.selectbox(
-    "Select Model:",
-    ("Logistic Regression", "Random Forest")
+# Model family selection
+model_family = st.selectbox(
+    "Choose Model Family:",
+    ("Tweets Models", "Fast Models")
 )
 
-# Input text box
-user_input = st.text_area("✏️ Enter text here:", height=150, placeholder="Type or paste a comment...")
+# Model selection within family
+model_choice = st.radio(
+    "Select Model:",
+    ("Logistic Regression", "Random Forest"),
+    horizontal=True
+)
 
-# Prediction
+# Load models dynamically
+vectorizer, lr_model, rf_model = load_models(model_family)
+
+# Input text
+text_input = st.text_area("✍️ Enter a tweet or post:", height=150)
+
+# Predict button
 if st.button("🔍 Predict"):
-    if user_input.strip() == "":
-        st.warning("Please enter some text before predicting.")
+    if not text_input.strip():
+        st.warning("Please enter some text first!")
     else:
-        # Clean and vectorize
-        cleaned = clean_text(user_input)
-        X_input = vectorizer.transform([cleaned])
+        clean = clean_text(text_input)
+        vec = vectorizer.transform([clean])
 
-        # Choose model
         if model_choice == "Logistic Regression":
-            pred = log_model.predict(X_input)[0]
+            pred = lr_model.predict(vec)[0]
         else:
-            pred = rf_model.predict(X_input)[0]
+            pred = rf_model.predict(vec)[0]
 
-        # Display result
-        if pred.lower() == "not_cyberbullying":
-            st.success("✅ This comment is **NOT cyberbullying**.")
-        else:
-            st.error(f"⚠️ This comment is classified as **{pred.upper()}**.")
+        st.success(f"🔹 Predicted Cyberbullying Type: **{pred}**")
+
+# Footer
+st.markdown("---")
+st.caption("Developed with ❤️ using Streamlit and Scikit-learn.")
