@@ -43,9 +43,9 @@ def load_models(family):
 # ------------------------------------------------------------
 # 🎨 Streamlit UI
 # ------------------------------------------------------------
-st.set_page_config(page_title="Cyberbullying Detector", page_icon="⚡", layout="centered")
+st.set_page_config(page_title="Cyberbullying Detector", layout="centered")
 
-st.title("⚡ Cyberbullying Detection System")
+st.title("Cyberbullying Detection System")
 st.write("Detect cyberbullying type using two families of ML models trained on different datasets.")
 
 # Model family selection
@@ -65,7 +65,7 @@ model_choice = st.radio(
 vectorizer, lr_model, rf_model = load_models(model_family)
 
 # Input text
-text_input = st.text_area("✍️ Enter a tweet or post:", height=150)
+text_input = st.text_area(" Enter a tweet or post:", height=150)
 
 # Predict button
 if st.button("🔍 Predict"):
@@ -84,4 +84,4 @@ if st.button("🔍 Predict"):
 
 # Footer
 st.markdown("---")
-st.caption("Developed with ❤️ using Streamlit and Scikit-learn.")
+st.caption("Developed using Streamlit and Scikit-learn.")
