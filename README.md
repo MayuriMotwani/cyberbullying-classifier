@@ -22,9 +22,8 @@ This project uses a combination of two publicly available datasets:
 - TF-IDF vectorization for feature extraction  
 
 *Links to original datasets:*  
-- [Cyberbullying Tweets Dataset](#)  
-- [Cyberbullying Dataset](#) *(replace # with actual link if available)*
-
+- [Cyberbullying Tweets Dataset](https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification)  
+- [Cyberbullying Dataset](https://www.kaggle.com/datasets/saurabhshahane/cyberbullying-dataset) 
 ---
 
 ## ⚙️ Methods
@@ -119,15 +118,12 @@ cyberbullying-classifier/
 ├── generate_images_and_readme.py
 ├── main_pipeline.py
 └── README.md
+
 🧩 Tech Stack
 Python 3.x
-
 Pandas, NumPy, Scikit-learn
-
 Matplotlib / Seaborn
-
 NLTK
-
 Joblib
 
 🧠 Author
@@ -137,28 +133,17 @@ B.Tech, Computer Science Engineering — Data Science Lab
 
 🏁 Conclusion
 Logistic Regression achieved the best accuracy (~65%) for cyberbullying classification.
-
 Random Forest shows promise for complex patterns but is sensitive to class imbalance.
-
 Proper preprocessing (text normalization, stopword removal) and TF-IDF features are crucial.
-
 Future improvements include:
-
 BERT or LSTM-based embeddings
-
 Real-time Streamlit dashboard for moderation
-
 Bias and fairness analysis in NLP models
 
 📚 References
 Cyberbullying Tweets Dataset
-
 Cyberbullying Dataset
-
 Scikit-learn documentation: https://scikit-learn.org/
-
 NLTK library: https://www.nltk.org/
-
 Matplotlib: https://matplotlib.org/
-
 Seaborn: https://seaborn.pydata.org/
