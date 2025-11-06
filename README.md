@@ -115,15 +115,9 @@ B.Tech, Computer Science Engineering — Data Science Lab
 
 🏁 Summary
 This project is a foundational NLP experiment in social media analysis and automated moderation.
-
 Future extensions include:
-
 BERT or LSTM-based text embeddings
-
 Real-time Streamlit dashboard
-
 Bias and fairness analysis in language models
 
-vbnet
-Copy code
 
