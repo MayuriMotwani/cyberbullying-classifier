@@ -1,103 +1,118 @@
-#  Cyberbullying Comment Classifier
+# 🧠 Cyberbullying Comment Classifier
 
-A **Machine Learning web application** built with **Streamlit** that detects and classifies cyberbullying comments on social media posts.  
-This project uses Logistic Regression and Random Forest models trained on real-world cyberbullying datasets.
-
----
-
-##  Features
-- Predicts if a given text contains **cyberbullying or not**.
-- Classifies the type of cyberbullying (e.g., Religion, Age, Gender, Ethnicity, etc.).
-- Built using **Python**, **Scikit-learn**, and **Streamlit**.
-- Real-time web interface for instant predictions.
+A **machine learning project** designed to detect and classify **cyberbullying comments** across social media posts using **TF-IDF features** and two optimized models — **Logistic Regression** and **Random Forest**.  
+Built with a focus on **speed, interpretability, and real-world usability**.
 
 ---
 
-##  Project Structure
-cyberbullying-classifier/
-├── app.py # Streamlit app file
-├── artifacts/ # Saved model files
-│ ├── tweets_LR.joblib
-│ ├── tweets_RF.joblib
-│ ├── tweets_vectorizer.joblib
-│ ├── vectorizer_fast.joblib
+## 🌍 Project Overview
+
+Cyberbullying remains a major concern in digital communication.  
+This project demonstrates a **text classification pipeline** that can automatically categorize online comments into specific bullying types such as **age, gender, religion, ethnicity**, and more.
+
+The dataset used combines:
+- `cyberbullying_tweets.csv`
+- `cyberbullying_dataset.csv`
+
+Both merged and cleaned for balanced representation.
+
+---
+
+## 📊 Exploratory Data Analysis
+
+<p align="center">
+  <img src="images/eda_dark.png" width="85%" alt="EDA Visualization">
+</p>
+
+---
+
+## ⚙️ Model Architecture
+
+Text preprocessing → TF-IDF Vectorization → Dual Model Comparison
+
+- **Model 1:** Logistic Regression (fast, interpretable baseline)  
+- **Model 2:** Random Forest (non-linear, ensemble approach)
+
+<p align="center">
+  <img src="images/model_dark.png" width="85%" alt="Model Workflow Diagram">
+</p>
+
+---
+
+## 📈 Model Performance
+
+| Model | Accuracy | Strengths |
+|:------|:----------|:-----------|
+| Logistic Regression | **64.73%** | Fast training and good generalization |
+| Random Forest | **58.07%** | Better on complex relations, but slower |
+
+<p align="center">
+  <img src="images/confusion_dark.png" width="80%" alt="Confusion Matrix Visualization">
+</p>
+
+---
+
+## 🧪 Key Observations
+
+- **Logistic Regression** performed best overall (65% accuracy).
+- **Random Forest** struggled with unbalanced labels but showed strong recall in a few minority classes.
+- Text normalization and stopword removal were critical to improving accuracy.
+
+---
+
+## 📁 Project Structure
+
+├── artifacts/
 │ ├── LogisticRegression_fast.joblib
 │ ├── RandomForest_fast.joblib
-├── cyberbullying_tweets.csv # Dataset 1
-├── cyberbullying_data.csv # Dataset 2
-├── requirements.txt # Python dependencies
-└── README.md # Project description (this file)
-
+│ └── vectorizer_fast.joblib
+├── images/
+│ ├── eda_dark.png
+│ ├── model_dark.png
+│ └── confusion_dark.png
+├── cyberbullying_tweets.csv
+├── cyberbullying_dataset.csv
+├── generate_images_and_readme.py
+├── main_pipeline.py
+└── README.md
 
 
 ---
 
-##  Models Used
-- **Logistic Regression** — Fast and accurate text classifier  
-- **Random Forest** — Robust ensemble learning model  
-- **TfidfVectorizer** — Converts comments into numerical features  
+## 🧩 Tech Stack
+
+- **Python 3.x**
+- **Pandas**, **NumPy**, **Scikit-learn**
+- **Matplotlib / Seaborn**
+- **NLTK**
+- **Joblib**
 
 ---
 
-##  Dataset
-The datasets used are publicly available:
-- [Cyberbullying Tweets Dataset (Kaggle)](https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification)
-- Custom preprocessed dataset: `cyberbullying_data.csv`
+## 🚀 Usage
 
----
 
-## ⚙️ Installation & Usage
+python main_pipeline.py
 
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/MayuriMotwani/cyberbullying-classifier.git
-cd cyberbullying-classifier
-2️⃣ Install dependencies
-bash
-Copy code
-pip install -r requirements.txt
-3️⃣ Run the Streamlit app
-bash
-Copy code
-streamlit run app.py
-Now open your browser and go to:
-👉 http://localhost:8501
+Or regenerate visuals and docs:
 
-☁️ Deployment (Optional)
-You can deploy this project for free on Streamlit Cloud:
+python generate_images_and_readme.py
+Outputs:
+artifacts/     → trained models
+images/        → visualization set
+README.md      → updated project summary
+🧠 Author
 
-Go to https://share.streamlit.io
-
-Connect your GitHub account
-
-Select this repository
-
-Click Deploy
-
-Your live app will look like:
-https://cyberbullying-classifier.streamlit.app
-
-🛠️ Requirements
-All required Python libraries are listed in requirements.txt, including:
-
-streamlit
-
-pandas
-
-scikit-learn
-
-joblib
-
-nltk
-
-👩‍💻 Author
 Mayuri Motwani
-B.Tech in Computer Science Engineering
-Machine Learning Project
-📧 Project: Cyberbullying Comment Classifier
+B.Tech Computer Science Engineering — Data Science Lab
+✨ Passionate about AI, NLP, and social good applications.
+🏁 Summary
 
-📜 License
-This project is licensed under the MIT License —
-you are free to use, modify, and share it with proper attribution.
+This project is a foundational NLP experiment in social media analysis and automated moderation.
+Future extensions include:
 
+BERT or LSTM-based text embeddings
 
+Real-time Streamlit dashboard
+
+Bias and fairness analysis in language models
