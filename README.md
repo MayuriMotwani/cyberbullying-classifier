@@ -91,24 +91,31 @@ Text preprocessing → TF-IDF Vectorization → Dual Model Comparison
 
 ## 🚀 Usage
 
+To run the main pipeline:
 
+```bash
 python main_pipeline.py
+Or, to regenerate visuals and update documentation:
 
-Or regenerate visuals and docs:
-
+bash
+Copy code
 python generate_images_and_readme.py
 Outputs:
-artifacts/     → trained models
-images/        → visualization set
-README.md      → updated project summary
+
+artifacts/ → trained models
+
+images/ → visualization set
+
+README.md → updated project summary
+
 🧠 Author
-
 Mayuri Motwani
-B.Tech Computer Science Engineering — Data Science Lab
-✨ Passionate about AI, NLP, and social good applications.
-🏁 Summary
+B.Tech, Computer Science Engineering — Data Science Lab
+✨ Passionate about AI, NLP, and social good applications
 
+🏁 Summary
 This project is a foundational NLP experiment in social media analysis and automated moderation.
+
 Future extensions include:
 
 BERT or LSTM-based text embeddings
@@ -116,3 +123,7 @@ BERT or LSTM-based text embeddings
 Real-time Streamlit dashboard
 
 Bias and fairness analysis in language models
+
+vbnet
+Copy code
+
