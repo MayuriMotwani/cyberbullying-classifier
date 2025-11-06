@@ -1,37 +1,46 @@
 # 🧠 Cyberbullying Comment Classifier
 
-A **machine learning project** designed to detect and classify **cyberbullying comments** across social media posts using **TF-IDF features** and two optimized models — **Logistic Regression** and **Random Forest**.  
-Built with a focus on **speed, interpretability, and real-world usability**.
+A **machine learning project** designed to detect and classify **cyberbullying comments** on social media posts using **TF-IDF features** and two optimized models — **Logistic Regression** and **Random Forest**.  
+
+Cyberbullying is a growing concern in digital communication, affecting mental health and social behavior. This project demonstrates an **automated NLP pipeline** that can classify comments into bullying categories such as **age, gender, religion, ethnicity**, and more, achieving a **best accuracy of ~65%**.
 
 ---
 
-## 🌍 Project Overview
+## 🌍 Dataset Source
 
-Cyberbullying remains a major concern in digital communication.  
-This project demonstrates a **text classification pipeline** that can automatically categorize online comments into specific bullying types such as **age, gender, religion, ethnicity**, and more.
+This project uses a combination of two publicly available datasets:
 
-The dataset used combines:
-- `cyberbullying_tweets.csv`
-- `cyberbullying_dataset.csv`
+- `cyberbullying_tweets.csv` (~5000 samples)  
+- `cyberbullying_dataset.csv` (~3000 samples)  
 
-Both merged and cleaned for balanced representation.
+**Preprocessing and treatment:**
+
+- Merged both datasets for a balanced representation  
+- Removed duplicates and missing entries  
+- Text normalization (lowercasing, punctuation removal)  
+- Stopword removal using NLTK  
+- TF-IDF vectorization for feature extraction  
+
+*Links to original datasets:*  
+- [Cyberbullying Tweets Dataset](#)  
+- [Cyberbullying Dataset](#) *(replace # with actual link if available)*
 
 ---
 
-## 📊 Exploratory Data Analysis
+## ⚙️ Methods
 
-<p align="center">
-  <img src="images/eda_dark.png" width="85%" alt="EDA Visualization">
-</p>
+The overall workflow:
 
----
+**Text preprocessing → TF-IDF Vectorization → Model Training → Evaluation**
 
-## ⚙️ Model Architecture
+**Models Used:**
 
-Text preprocessing → TF-IDF Vectorization → Dual Model Comparison
+| Model | Description | Reason for Choice |
+|-------|-------------|-----------------|
+| Logistic Regression | Linear model for classification | Fast, interpretable, good baseline |
+| Random Forest | Ensemble of decision trees | Handles non-linear patterns, robust to overfitting |
 
-- **Model 1:** Logistic Regression (fast, interpretable baseline)  
-- **Model 2:** Random Forest (non-linear, ensemble approach)
+**Alternative approaches considered:** SVM, Naive Bayes, deep learning (LSTM/BERT embeddings) — Logistic Regression + Random Forest chosen for **speed, interpretability, and simplicity**.
 
 <p align="center">
   <img src="images/model_dark.png" width="85%" alt="Model Workflow Diagram">
@@ -39,63 +48,48 @@ Text preprocessing → TF-IDF Vectorization → Dual Model Comparison
 
 ---
 
-## 📈 Model Performance
+## 📊 Exploratory Data Analysis
+
+Class distribution and basic EDA insights:
+
+<p align="center">
+  <img src="images/eda_dark.png" width="85%" alt="EDA Visualization">
+</p>
+
+- Classes are somewhat imbalanced, requiring careful evaluation of minority classes.  
+- Text length and keyword frequency were analyzed to guide preprocessing.
+
+---
+
+## 📈 Experiments and Results
+
+**Model performance comparison:**
 
 | Model | Accuracy | Strengths |
-|:------|:----------|:-----------|
-| Logistic Regression | **64.73%** | Fast training and good generalization |
-| Random Forest | **58.07%** | Better on complex relations, but slower |
+|:------|:--------|:-----------|
+| Logistic Regression | **64.73%** | Fast training, good generalization |
+| Random Forest | **58.07%** | Handles complex patterns, better recall for minority classes |
 
 <p align="center">
   <img src="images/confusion_dark.png" width="80%" alt="Confusion Matrix Visualization">
 </p>
 
----
+**Key Observations:**
 
-## 🧪 Key Observations
-
-- **Logistic Regression** performed best overall (65% accuracy).
-- **Random Forest** struggled with unbalanced labels but showed strong recall in a few minority classes.
-- Text normalization and stopword removal were critical to improving accuracy.
-
----
-
-## 📁 Project Structure
-
-├── artifacts/
-│ ├── LogisticRegression_fast.joblib
-│ ├── RandomForest_fast.joblib
-│ └── vectorizer_fast.joblib
-├── images/
-│ ├── eda_dark.png
-│ ├── model_dark.png
-│ └── confusion_dark.png
-├── cyberbullying_tweets.csv
-├── cyberbullying_dataset.csv
-├── generate_images_and_readme.py
-├── main_pipeline.py
-└── README.md
-
+- Logistic Regression performed best overall.  
+- Random Forest struggled with unbalanced labels but showed strong recall in some minority classes.  
+- Text normalization and stopword removal significantly improved accuracy.  
+- TF-IDF vectorization captured the most informative features for classification.
 
 ---
 
-## 🧩 Tech Stack
+## 🚀 Steps to Run the Code
 
-- **Python 3.x**
-- **Pandas**, **NumPy**, **Scikit-learn**
-- **Matplotlib / Seaborn**
-- **NLTK**
-- **Joblib**
-
----
-
-## 🚀 Usage
-
-To run the main pipeline:
+1. **Run the main pipeline:**
 
 ```bash
 python main_pipeline.py
-Or, to regenerate visuals and update documentation:
+Or regenerate visuals and README documentation:
 
 bash
 Copy code
@@ -108,16 +102,63 @@ images/ → visualization set
 
 README.md → updated project summary
 
+📁 Project Structure
+sql
+Copy code
+cyberbullying-classifier/
+├── artifacts/
+│   ├── LogisticRegression_fast.joblib
+│   ├── RandomForest_fast.joblib
+│   └── vectorizer_fast.joblib
+├── images/
+│   ├── eda_dark.png
+│   ├── model_dark.png
+│   └── confusion_dark.png
+├── cyberbullying_tweets.csv
+├── cyberbullying_dataset.csv
+├── generate_images_and_readme.py
+├── main_pipeline.py
+└── README.md
+🧩 Tech Stack
+Python 3.x
+
+Pandas, NumPy, Scikit-learn
+
+Matplotlib / Seaborn
+
+NLTK
+
+Joblib
+
 🧠 Author
 Mayuri Motwani
 B.Tech, Computer Science Engineering — Data Science Lab
 ✨ Passionate about AI, NLP, and social good applications
 
-🏁 Summary
-This project is a foundational NLP experiment in social media analysis and automated moderation.
-Future extensions include:
-BERT or LSTM-based text embeddings
-Real-time Streamlit dashboard
-Bias and fairness analysis in language models
+🏁 Conclusion
+Logistic Regression achieved the best accuracy (~65%) for cyberbullying classification.
 
+Random Forest shows promise for complex patterns but is sensitive to class imbalance.
 
+Proper preprocessing (text normalization, stopword removal) and TF-IDF features are crucial.
+
+Future improvements include:
+
+BERT or LSTM-based embeddings
+
+Real-time Streamlit dashboard for moderation
+
+Bias and fairness analysis in NLP models
+
+📚 References
+Cyberbullying Tweets Dataset
+
+Cyberbullying Dataset
+
+Scikit-learn documentation: https://scikit-learn.org/
+
+NLTK library: https://www.nltk.org/
+
+Matplotlib: https://matplotlib.org/
+
+Seaborn: https://seaborn.pydata.org/
